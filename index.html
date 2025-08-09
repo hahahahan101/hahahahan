@@ -10,17 +10,176 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
+        /* General Styles */
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #ffffff;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
+            font-size: 14px; /* Base font size */
+            line-height: 1.5;
         }
 
+        h1, h2, h3, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style for Navigation */
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            font-family: 'Poppins', sans-serif;
+            padding: 8px 0;
+            width: 100%;
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .nav-brand img {
+            height: 35px;
+            width: auto;
+        }
+        
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.9em;
+        }
+        
+        .nav-links a:hover {
+            color: #007bff;
+        }
+        
+        .cta-btn {
+            background-color: #007bff;
+            color: white !important;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            font-size: 0.9em;
+        }
+        
+        .cta-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Mobile menu toggle button */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #333;
+            border: none;
+            background: none;
+            padding: 5px;
+        }
+        
+        /* Mobile menu overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #ffffff;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px 30px;
+            box-sizing: border-box;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-menu-overlay.open {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .mobile-menu-header h2 {
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .mobile-menu-close-btn {
+            background: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1.5em;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        
+        .mobile-nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 2em;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            font-size: 1em;
+            cursor: pointer;
+            align-self: flex-start;
+        }
+        
+        .lang-switcher i {
+            color: #333;
+        }
+
+        /* Profile Section */
         .profile-container {
             display: flex;
             align-items: flex-start;
-            gap: 20px;
+            gap: 25px;
             max-width: 800px;
             margin: 40px auto 0 auto;
         }
@@ -30,6 +189,7 @@
             height: 100px;
             border-radius: 50%;
             object-fit: cover;
+            flex-shrink: 0;
         }
 
         .profile-info {
@@ -37,68 +197,140 @@
         }
 
         .profile-info h1 {
-            font-size: 1.5em; /* Ukuran font diperkecil */
+            font-size: 1.8em;
             font-weight: bold;
-            margin: 0;
             color: #333;
+            margin-bottom: 5px;
         }
 
         .profile-info p {
-            font-size: 0.8em; /* Ukuran font diperkecil */
+            font-size: 0.9em;
             color: #555;
             margin: 5px 0 15px 0;
-            line-height: 1.4;
         }
         
         .contact-link {
             display: inline-block;
-            color: #007bff;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
             text-decoration: none;
-            transition: text-decoration 0.3s ease;
-            font-size: 0.8em;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
         }
 
         .contact-link:hover {
-            text-decoration: underline;
+            background-color: #0056b3;
+            text-decoration: none;
         }
 
-        /* Education Wrapper */
-        .edu-wrapper {
-            max-width: 1000px;
-            margin: 30px auto 0 auto;
+        /* Experience and Education Wrapper */
+        .section-wrapper {
+            max-width: 900px;
+            margin: 40px auto 0 auto;
             display: flex;
-            gap: 20px;
+            gap: 30px;
             flex-wrap: wrap;
         }
-
-        .education-section {
+        
+        .section-item {
             flex: 1;
-            min-width: 300px;
+            min-width: 280px;
         }
 
-        .education-section h2 {
-            font-size: 1.1em; /* Ukuran font diperkecil */
+        .section-item h2, .portfolio-section h2, .contact-section h2 {
+            font-size: 1.3em;
             margin-bottom: 15px;
             color: #333;
+            font-weight: 600;
         }
 
+        /* Style for Portfolio Banner */
+        .portfolio-section {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+        .portfolio-banner {
+            display: flex;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            color: white;
+            overflow: hidden;
+        }
+        .portfolio-banner-content {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .portfolio-banner-content h3 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .portfolio-banner-content p {
+            font-size: 0.9em;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        .portfolio-banner-image {
+            flex: 1;
+            background-image: url('image_d9b3dd.png');
+            background-size: cover;
+            background-position: center;
+            min-height: 200px;
+        }
+        .portfolio-btn {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: background-color 0.3s ease;
+        }
+        .portfolio-btn:hover {
+            background-color: #e9e9e9;
+        }
+
+        /* Responsive Portfolio Banner */
+        @media (max-width: 768px) {
+            .portfolio-banner {
+                flex-direction: column;
+            }
+            .portfolio-banner-content {
+                padding: 20px;
+                text-align: center;
+            }
+            .portfolio-banner-image {
+                min-height: 180px;
+            }
+        }
+
+        /* Accordion */
         .accordion {
             background-color: #f7f7f7;
             color: #333;
             cursor: pointer;
-            padding: 10px 15px;
+            padding: 12px 18px;
             width: 100%;
             border: none;
             text-align: left;
             outline: none;
-            font-size: 0.8em; /* Ukuran font diperkecil */
+            font-size: 0.9em;
             transition: background-color 0.3s ease;
-            border-radius: 5px;
-            margin-bottom: 5px;
+            border-radius: 6px;
+            margin-bottom: 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-family: 'Poppins', sans-serif; /* Ditambahkan agar font ini juga Poppins */
+            font-family: 'Poppins', sans-serif;
         }
 
         .accordion:hover {
@@ -114,32 +346,39 @@
         }
 
         .panel {
-            padding: 0 15px;
+            padding: 0 18px;
             display: none;
             background-color: white;
             overflow: hidden;
             border-left: 3px solid #007bff;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        .panel p {
-            margin: 8px 0;
+        .panel p, .panel ul {
+            font-size: 0.85em;
             color: #555;
-            font-size: 0.75em; /* Ukuran font diperkecil */
-            font-family: 'Poppins', sans-serif; /* Ditambahkan agar font ini juga Poppins */
+            margin: 8px 0;
+        }
+        
+        .panel ul {
+            padding-left: 20px;
+        }
+        
+        .panel ul li {
+            margin-bottom: 4px;
         }
 
         /* Button */
         .view-cert-btn {
             background-color: #007bff;
             color: white;
-            padding: 5px 10px;
-            font-size: 0.7em; /* Ukuran font diperkecil */
+            padding: 6px 12px;
+            font-size: 0.8em;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin-top: 5px;
-            font-family: 'Poppins', sans-serif; /* Ditambahkan agar font ini juga Poppins */
+            margin-top: 8px;
+            font-family: 'Poppins', sans-serif;
         }
 
         .view-cert-btn:hover {
@@ -156,7 +395,7 @@
             background-color: rgba(0,0,0,0.7);
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
         }
 
         .modal-content {
@@ -164,7 +403,7 @@
             max-width: 80%;
             max-height: 80%;
             background: white;
-            border-radius: 8px;
+            border-radius: 6px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -190,7 +429,7 @@
 
         .carousel-slide {
             min-width: 100%;
-            max-height: 65vh;
+            max-height: 60vh;
         }
 
         .carousel-slide img {
@@ -203,36 +442,107 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 20px;
+            font-size: 18px;
             background-color: rgba(0,0,0,0.5);
             color: white;
-            padding: 6px 10px;
+            padding: 5px 8px;
             cursor: pointer;
             border-radius: 50%;
         }
 
-        .prev { left: 10px; }
-        .next { right: 10px; }
+        .prev { left: 8px; }
+        .next { right: 8px; }
 
         /* Close Button in Modal */
         .close-btn {
             background-color: #dc3545;
             color: white;
-            padding: 6px 14px;
-            font-size: 0.75em; /* Ukuran font diperkecil */
+            padding: 7px 14px;
+            font-size: 0.8em;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin: 10px 0 15px;
-            font-family: 'Poppins', sans-serif; /* Ditambahkan agar font ini juga Poppins */
+            margin: 12px 0;
+            font-family: 'Poppins', sans-serif;
         }
 
         .close-btn:hover {
             background-color: #b02a37;
         }
 
+        /* Contact Section */
+        .contact-section {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #f7f7f7;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .contact-section h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .contact-section p {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 0.85em;
+            color: #333;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-submit-btn {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-submit-btn:hover {
+            background-color: #0056b3;
+        }
+
         /* Footer */
-        footer {
+        .site-footer {
             text-align: center;
             padding: 30px 0;
             margin-top: 40px;
@@ -240,13 +550,13 @@
         }
 
         .social-icons {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .social-icons a {
-            margin: 0 10px;
+            margin: 0 8px;
             color: #6c757d;
-            font-size: 16px; /* Ukuran font diperkecil */
+            font-size: 1.1em;
             text-decoration: none;
             transition: color 0.3s;
         }
@@ -255,116 +565,279 @@
             color: #007bff;
         }
         
-        footer p {
-            font-size: 0.75em; /* Ukuran font diperkecil */
+        .site-footer p {
+            font-size: 0.8em;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .profile-info {
+                margin-top: 15px;
+            }
+            
+            .navbar-container .nav-links,
+            .navbar-container .cta-btn {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .section-wrapper {
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .section-item {
+                min-width: 100%;
+            }
+            .portfolio-banner {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="profile-container">
-    <img src="sehan.png" alt="Nursehan Zaelani" class="profile-picture">
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="#home" class="nav-brand"><img src="img/logo.jpg" alt="Logo"></a>
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="#home"><span data-en="Home">Beranda</span></a></li>
+            <li><a href="#experience"><span data-en="Experience">Pengalaman</span></a></li>
+            <li><a href="#portfolio"><span data-en="Portfolio">Portofolio</span></a></li>
+            <li><a href="#education"><span data-en="Education">Pendidikan</span></a></li>
+            <li><a href="#contact"><span data-en="Contact">Kontak</span></a></li>
+            <li><a href="https://wa.me/6289602307535" class="cta-btn" target="_blank"><span data-en="Let's Talk">Mari Berbincang</span></a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="mobile-menu-overlay">
+    <div class="mobile-menu-header">
+        <h2 data-en="Menu">Menu</h2>
+        <button class="mobile-menu-close-btn">&times;</button>
+    </div>
+    <ul class="mobile-nav-links">
+        <li><a href="#home"><span data-en="Home">Beranda</span></a></li>
+        <li><a href="#experience"><span data-en="Experience">Pengalaman</span></a></li>
+        <li><a href="#portfolio"><span data-en="Portfolio">Portofolio</span></a></li>
+        <li><a href="#education"><span data-en="Education">Pendidikan</span></a></li>
+        <li><a href="#contact"><span data-en="Contact">Kontak</span></a></li>
+    </ul>
+    <div class="lang-switcher" onclick="toggleLanguage()">
+        <i class="fas fa-comment"></i>
+        <span id="lang-text" data-en="English">Bahasa Indonesia</span>
+    </div>
+</div>
+
+<div id="home" class="profile-container">
+    <img src="img/sehan.png" alt="Nursehan Zaelani" class="profile-picture">
     <div class="profile-info">
         <h1>Nursehan Zaelani</h1>
-        <p>I’m a graduate of Informatics Engineering from STMIK IKMI Cirebon. Currently, I work as a Graphic Designer at Showroom Setia Kawan Motor, a Remote Graphic & UI Designer at PT Tecnolica Malini Kayya, and a Private Graphic Design Tutor at Hitaclass (PT Hitamedia Inovasi Hutama). With a passion for visual storytelling and user-centered design, I help businesses and individuals create engaging and effective digital experiences.</p>
-        <a href="mailto:nursehanz101@gmail.com" class="contact-link">Interested in collaborating? Feel free to email me!</a>
+        <p data-en="I'm a graduate of Informatics Engineering from STMIK IKMI Cirebon. Currently, I work as a Graphic Designer at Showroom Setia Kawan Motor, a Remote Graphic & UI Designer at PT Tecnolica Malini Kayya, and a Private Graphic Design Tutor at Hitaclass (PT Hitamedia Inovasi Hutama). With a passion for visual storytelling and user-centered design, I help businesses and individuals create engaging and effective digital experiences.">Saya lulusan Teknik Informatika dari STMIK IKMI Cirebon. Saat ini, saya bekerja sebagai Graphic Designer di Showroom Setia Kawan Motor, Remote Graphic & UI Designer di PT Tecnolica Malini Kayya, dan Private Graphic Design Tutor di Hitaclass (PT Hitamedia Inovasi Hutama). Dengan minat pada visual storytelling dan desain berpusat pada pengguna, saya membantu bisnis dan individu menciptakan pengalaman digital yang menarik dan efektif.</p>
+        <a href="#contact" class="contact-link"><span data-en="Interested in collaborating? Feel free to email me!">Tertarik untuk berkolaborasi? Jangan ragu untuk mengirim email kepada saya!</span></a>
     </div>
 </div>
 
-<div class="edu-wrapper">
-
-    <div class="education-section">
-        <h2>Formal Education</h2>
-
-        <button class="accordion">SMA Negeri 1 Palimanan (Dec 2017 – May 2020) <i class="fas fa-chevron-right"></i></button>
-        <div class="panel">
-            <p>I majored in Social Sciences (IPS) and actively participated in the PASS (School Arts Appreciation Program) organization, where I contributed to various creative and cultural school events that enhanced teamwork and leadership skills.</p>
-        </div>
-
-        <button class="accordion">STMIK IKMI Cirebon (Sep 2020 – Nov 2024) <i class="fas fa-chevron-right"></i></button>
-        <div class="panel">
-            <p>I have graduated with a Bachelor's degree (S1) in Informatics Engineering from STMIK IKMI Cirebon. I successfully completed my thesis and journal publication, which focused on researching the UI/UX design of online food product ordering websites.</p>
-        </div>
-
-        <button class="accordion">Universitas Negeri Padang (Aug 2022 – Dec 2022) <i class="fas fa-chevron-right"></i></button>
-        <div class="panel">
-            <p>In the fifth semester, I had the opportunity to take part in a program from Kampus Merdeka, namely Pertukaran Mahasiswa Merdeka, at Padang State University for one semester. I chose to take cross-majors, namely Indonesian Language and Literature Education and English Language Education. One of the most engaging activities in this program was the Nusantara Module Course, which explored Minangkabau culture and related aspects. Through this activity, students were encouraged to explore, discover, and implement the inspiration they gained, while making social contributions to the community in the West Sumatra region, particularly in Padang City.</p>
+<div id="experience">
+    <div class="section-wrapper">
+        <div class="section-item">
+            <h2 data-en="Professional Experience">Pengalaman Profesional</h2>
+            <button class="accordion">
+                <span data-en="Graphic Designer - Setia Kawan Motor (Apr 2024 – Present)">Graphic Designer - Setia Kawan Motor (Apr 2024 – Sekarang)</span>
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="panel">
+                <p data-en="At Honda Setia Kawan Motor Cirebon, I support the company's marketing efforts by creating visually appealing designs. My role involves:">Di Honda Setia Kawan Motor Cirebon, saya mendukung upaya pemasaran perusahaan dengan membuat desain yang menarik secara visual. Peran saya meliputi:</p>
+                <ul>
+                    <li data-en="Designing brochures, X-banners, and other promotional materials">Mendesain brosur, X-banner, dan materi promosi lainnya</li>
+                    <li data-en="Creating social media content to enhance brand awareness">Membuat konten media sosial untuk meningkatkan brand awareness</li>
+                    <li data-en="Ensuring design consistency across various marketing channels">Memastikan konsistensi desain di berbagai saluran pemasaran</li>
+                </ul>
+                <p data-en="Through effective visual communication, I help strengthen the company's brand and attract potential customers.">Melalui komunikasi visual yang efektif, saya membantu memperkuat merek perusahaan dan menarik calon pelanggan.</p>
+            </div>
+            <button class="accordion">
+                <span data-en="Graphic Designer & UI Designer - PT Tecnolica Malini Kayya (Mar 2025 – Present)">Graphic Designer & UI Designer - PT Tecnolica Malini Kayya (Mar 2025 – Sekarang)</span>
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="panel">
+                <p data-en="As a Graphic & UI Designer at Tecnolica, I contribute to the growth of small and medium businesses by creating visually compelling digital assets and intuitive user interfaces that enhance their online presence. My role involves:">Sebagai Graphic & UI Designer di Tecnolica, saya berkontribusi pada pertumbuhan bisnis kecil dan menengah dengan membuat aset digital yang menarik secara visual dan antarmuka pengguna yang intuitif yang meningkatkan kehadiran online mereka. Peran saya meliputi:</p>
+                <ul>
+                    <li data-en="Designing website layouts in JPG and PSD formats for client review">Mendesain tata letak situs web dalam format JPG dan PSD untuk tinjauan klien</li>
+                    <li data-en="Creating engaging ad creatives, website banners, and other digital marketing materials">Membuat materi iklan yang menarik, banner situs web, dan materi pemasaran digital lainnya</li>
+                    <li data-en="Applying UI/UX principles to improve customer engagement through effective, user-friendly design">Menerapkan prinsip UI/UX untuk meningkatkan keterlibatan pelanggan melalui desain yang efektif dan ramah pengguna</li>
+                    <li data-en="Translating marketing objectives into high-quality visuals and interface designs">Menerjemahkan tujuan pemasaran ke dalam visual berkualitas tinggi dan desain antarmuka</li>
+                    <li data-en="Crafting clean, consistent, and responsive UI components that align with client branding and goals">Membuat komponen UI yang bersih, konsisten, dan responsif yang selaras dengan branding dan tujuan klien</li>
+                </ul>
+                <p data-en="With a strong portfolio in website and landing page UI design, I leverage my skills to deliver impactful digital solutions that meet both user needs and business objectives.">Dengan portofolio yang kuat dalam desain UI situs web dan landing page, saya memanfaatkan keterampilan saya untuk memberikan solusi digital yang berdampak yang memenuhi kebutuhan pengguna dan tujuan bisnis.</p>
+            </div>
+            <button class="accordion">
+                <span data-en="Private Graphic Design Tutor - Hitaclass (Jul 2025 – Present)">Private Graphic Design Tutor - Hitaclass (Jul 2025 – Sekarang)</span>
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="panel">
+                <p data-en="At Hitaclass, I work as a private graphic design tutor, helping individuals build a strong foundation in design through one-on-one, hands-on learning. The course is tailored for those who want to develop their creative skills without needing a formal education background.">Di Hitaclass, saya bekerja sebagai tutor desain grafis privat, membantu individu membangun fondasi yang kuat dalam desain melalui pembelajaran satu-satu yang praktis. Kursus ini disesuaikan untuk mereka yang ingin mengembangkan keterampilan kreatif tanpa memerlukan latar belakang pendidikan formal.</p>
+                <p data-en="I create and deliver personalized lessons based on each student’s goals—covering core design principles and guided practice sessions. My focus is on helping students develop a solid portfolio and gain the confidence to pursue opportunities in the creative industry.">Saya membuat dan memberikan pelajaran yang dipersonalisasi berdasarkan tujuan setiap siswa—meliputi prinsip-prinsip desain inti dan sesi praktik terpandu. Fokus saya adalah membantu siswa mengembangkan portofolio yang solid dan mendapatkan kepercayaan diri untuk mengejar peluang di industri kreatif.</p>
+            </div>
         </div>
     </div>
-
-    <div class="education-section">
-        <h2>Informal Education</h2>
-
-        <button class="accordion">Data Management Staff - Digitalent Kominfo (Jul 2022) <i class="fas fa-chevron-right"></i></button>
-        <div class="panel">
-            <p>Throughout this training, participants acquire advanced proficiency in office software operation and other skills required for the Data Management Staff occupation. The training's objective is to produce Data Management Staff capable of effectively resolving office-related issues or tasks.</p>
-            <button class="view-cert-btn" onclick="openModal(['cert-dms-1.jpg','cert-dms-2.jpg'])">View Certificate</button>
+    
+    <div id="portfolio" class="portfolio-section">
+        <h2 data-en="Portfolio">Portofolio</h2>
+        <div class="portfolio-banner">
+            <div class="portfolio-banner-content">
+                <h3 data-en="Interested in My Projects?">Tertarik dengan Proyek Saya?</h3>
+                <p data-en="Explore my various graphic and UI/UX design works to see how I can help you achieve your business goals.">Jelajahi berbagai karya desain grafis dan UI/UX saya untuk melihat bagaimana saya dapat membantu Anda mencapai tujuan bisnis Anda.</p>
+                <a href="#" class="portfolio-btn"><span data-en="View More Projects">Lihat Lebih Banyak Proyek</span></a>
+            </div>
+            <div class="portfolio-banner-image"></div>
         </div>
-
-        <button class="accordion">Junior Web Developer - Digitalent Kominfo (Jul 2023) <i class="fas fa-chevron-right"></i></button>
-        <div class="panel">
-            <p>I learned to implement user interfaces, execute programming commands in text-based, graphic, and multimedia formats, organize functions, files, or other programming resources neatly, write code following guidelines and best practices, apply structured programming, and utilize existing libraries or components.</p>
-            <button class="view-cert-btn" onclick="openModal(['cert-jwd-1.jpg','cert-jwd-2.jpg'])">View Certificate</button>
-        </div>
-
-        <button class="accordion">Junior Graphic Designer - Digitalent Kominfo (Aug 2023) <i class="fas fa-chevron-right"></i></button>
-        <div class="panel">
-            <p>Throughout this training, I developed the ability to identify necessary visual elements and design them using design software to solve visual communication issues faced by clients. The training's output aims to produce junior graphic designers capable of effectively providing solutions to visual communication challenges.</p>
-            <button class="view-cert-btn" onclick="openModal(['cert-gd-1.jpg','cert-gd-2.jpg'])">View Certificate</button>
-        </div>
-    </div>
-
-</div>
-
-<div class="education-section" style="max-width: 1000px; margin: 30px auto;">
-    <h2>Organization Experience</h2>
-
-    <button class="accordion">
-        Band Coordinator - PASS, SMA Negeri 1 Palimanan (Dec 2018 – Dec 2019)
-        <i class="fas fa-chevron-right"></i>
-    </button>
-    <div class="panel">
-        <p>The band coordinator is responsible for planning the practice schedule, developing concepts for practice materials, innovating with new ideas, solving problems, and maintaining effective communication between band members.</p>
-    </div>
-
-    <button class="accordion">
-        Head of Equipment Division - UKM Music STMIK IKMI Cirebon (Mar 2021 – Mar 2023)
-        <i class="fas fa-chevron-right"></i>
-    </button>
-    <div class="panel">
-        <p>The head of the equipment division is responsible for supervising and directing members to maintain the available musical instruments.</p>
-    </div>
-
-    <button class="accordion">
-        Participant Volunteer - KIP Kuliah 2022 (Jan 2022 – Sept 2022)
-        <i class="fas fa-chevron-right"></i>
-    </button>
-    <div class="panel">
-        <p>KIP Kuliah volunteers are people who are committed and work voluntarily to make the KIP Kuliah program initiated by the government a success. 
-        The task of KIP Kuliah volunteers is to carry out outreach and assist high school students who have difficulty paying for college. 
-        The students targeted for socialization by the volunteers are high school students graduating in 2019, 2021, and 2022.</p>
-
-        <p>Volunteers are tasked with providing comprehensive information about KIP Kuliah, starting from the meaning, requirements, and how to get it 
-        to the benefits of having KIP Kuliah. Not only that, volunteers are also required to provide motivation so that students want to continue studying.</p>
-
-        <p>Even though they work voluntarily, of course there are several benefits that KIP Kuliah volunteers can get. Volunteers can have a wider network of connections, 
-        especially with fellow volunteers who come from various regions of Indonesia. Apart from that, volunteers will also get an experience e-certificate.</p>
-
-        <p>However, the most important thing to understand is that KIP Kuliah volunteers have indirectly helped produce a competent young generation who can advance the nation. 
-        So, volunteers have a big role in the world of education and can be agents of change in society.</p>
-
-        <button class="view-cert-btn" onclick="openModal(['cert-kip-1.jpg','cert-kip-2.jpg'])">View Certificate</button>
     </div>
 </div>
 
-<footer>
+<div id="education" class="section-wrapper">
+    <div class="section-item">
+        <h2 data-en="Formal Education">Pendidikan Formal</h2>
+
+        <button class="accordion">
+            <span data-en="SMA Negeri 1 Palimanan (Dec 2017 – May 2020)">SMA Negeri 1 Palimanan (Des 2017 – Mei 2020)</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="panel">
+            <p data-en="I majored in Social Sciences (IPS) and actively participated in the PASS (School Arts Appreciation Program) organization, where I contributed to various creative and cultural school events that enhanced teamwork and leadership skills.">Saya mengambil jurusan Ilmu Pengetahuan Sosial (IPS) dan aktif berpartisipasi dalam organisasi PASS (Program Apresiasi Seni Sekolah), di mana saya berkontribusi pada berbagai acara kreatif dan budaya sekolah yang meningkatkan kerja tim dan keterampilan kepemimpinan.</p>
+        </div>
+
+        <button class="accordion">
+            <span data-en="STMIK IKMI Cirebon (Sep 2020 – Nov 2024)">STMIK IKMI Cirebon (Sep 2020 – Nov 2024)</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="panel">
+            <p data-en="I have graduated with a Bachelor's degree (S1) in Informatics Engineering from STMIK IKMI Cirebon. I successfully completed my thesis and journal publication, which focused on researching the UI/UX design of online food product ordering websites.">Saya telah lulus dengan gelar Sarjana (S1) Teknik Informatika dari STMIK IKMI Cirebon. Saya berhasil menyelesaikan skripsi dan publikasi jurnal, yang berfokus pada penelitian desain UI/UX situs web pemesanan produk makanan online.</p>
+        </div>
+
+        <button class="accordion">
+            <span data-en="Universitas Negeri Padang (Aug 2022 – Dec 2022)">Universitas Negeri Padang (Agu 2022 – Des 2022)</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="panel">
+            <p data-en="In the fifth semester, I had the opportunity to take part in a program from Kampus Merdeka, namely Pertukaran Mahasiswa Merdeka, at Padang State University for one semester. I chose to take cross-majors, namely Indonesian Language and Literature Education and English Language Education. One of the most engaging activities in this program was the Nusantara Module Course, which explored Minangkabau culture and related aspects. Through this activity, students were encouraged to explore, discover, and implement the inspiration they gained, while making social contributions to the community in the West Sumatra region, particularly in Padang City.">Pada semester lima, saya berkesempatan mengikuti program dari Kampus Merdeka, yaitu Pertukaran Mahasiswa Merdeka, di Universitas Negeri Padang selama satu semester. Saya memilih untuk mengambil lintas jurusan, yaitu Pendidikan Bahasa dan Sastra Indonesia serta Pendidikan Bahasa Inggris. Salah satu kegiatan paling menarik dalam program ini adalah Mata Kuliah Modul Nusantara, yang mendalami budaya Minangkabau dan aspek-aspek terkait. Melalui kegiatan ini, mahasiswa didorong untuk menjelajahi, menemukan, dan mengimplementasikan inspirasi yang mereka dapatkan, sambil memberikan kontribusi sosial kepada masyarakat di wilayah Sumatera Barat, khususnya di Kota Padang.</p>
+        </div>
+    </div>
+
+    <div class="section-item">
+        <h2 data-en="Informal Education">Pendidikan Informal</h2>
+
+        <button class="accordion">
+            <span data-en="Data Management Staff - Digitalent Kominfo (Jul 2022)">Data Management Staff - Digitalent Kominfo (Jul 2022)</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="panel">
+            <p data-en="Throughout this training, participants acquire advanced proficiency in office software operation and other skills required for the Data Management Staff occupation. The training's objective is to produce Data Management Staff capable of effectively resolving office-related issues or tasks.">Selama pelatihan ini, peserta memperoleh kemahiran lanjutan dalam pengoperasian perangkat lunak kantor dan keterampilan lain yang diperlukan untuk pekerjaan Staf Manajemen Data. Tujuan pelatihan ini adalah menghasilkan Staf Manajemen Data yang mampu secara efektif menyelesaikan masalah atau tugas terkait kantor.</p>
+            <button class="view-cert-btn" onclick="openModal(['cert-dms-1.jpg','cert-dms-2.jpg'])"><span data-en="View Certificate">Lihat Sertifikat</span></button>
+        </div>
+
+        <button class="accordion">
+            <span data-en="Junior Web Developer - Digitalent Kominfo (Jul 2023)">Junior Web Developer - Digitalent Kominfo (Jul 2023)</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="panel">
+            <p data-en="I learned to implement user interfaces, execute programming commands in text-based, graphic, and multimedia formats, organize functions, files, or other programming resources neatly, write code following guidelines and best practices, apply structured programming, and utilize existing libraries or components.">Saya belajar menerapkan antarmuka pengguna, menjalankan perintah pemrograman dalam format berbasis teks, grafis, dan multimedia, mengorganisasi fungsi, file, atau sumber daya pemrograman lain dengan rapi, menulis kode mengikuti pedoman dan praktik terbaik, menerapkan pemrograman terstruktur, dan memanfaatkan pustaka atau komponen yang ada.</p>
+            <button class="view-cert-btn" onclick="openModal(['cert-jwd-1.jpg','cert-jwd-2.jpg'])"><span data-en="View Certificate">Lihat Sertifikat</span></button>
+        </div>
+
+        <button class="accordion">
+            <span data-en="Junior Graphic Designer - Digitalent Kominfo (Aug 2023)">Junior Graphic Designer - Digitalent Kominfo (Aug 2023)</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="panel">
+            <p data-en="Throughout this training, I developed the ability to identify necessary visual elements and design them using design software to solve visual communication issues faced by clients. The training's output aims to produce junior graphic designers capable of effectively providing solutions to visual communication challenges.">Sepanjang pelatihan ini, saya mengembangkan kemampuan untuk mengidentifikasi elemen visual yang diperlukan dan mendesainnya menggunakan perangkat lunak desain untuk memecahkan masalah komunikasi visual yang dihadapi klien. Keluaran pelatihan ini bertujuan untuk menghasilkan desainer grafis junior yang mampu secara efektif memberikan solusi untuk tantangan komunikasi visual.</p>
+            <button class="view-cert-btn" onclick="openModal(['cert-gd-1.jpg','cert-gd-2.jpg'])"><span data-en="View Certificate">Lihat Sertifikat</span></button>
+        </div>
+    </div>
+    
+    <div class="section-item">
+        <h2 data-en="Organization Experience">Pengalaman Organisasi</h2>
+
+        <button class="accordion">
+            <span data-en="Band Coordinator - PASS, SMA Negeri 1 Palimanan (Dec 2018 – Dec 2019)">
+                Koordinator Band - PASS, SMA Negeri 1 Palimanan (Des 2018 – Des 2019)
+            </span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="panel">
+            <p data-en="The band coordinator is responsible for planning the practice schedule, developing concepts for practice materials, innovating with new ideas, solving problems, and maintaining effective communication between band members.">Koordinator band bertanggung jawab untuk merencanakan jadwal latihan, mengembangkan konsep materi latihan, berinovasi dengan ide-ide baru, memecahkan masalah, dan menjaga komunikasi yang efektif antar anggota band.</p>
+        </div>
+
+        <button class="accordion">
+            <span data-en="Head of Equipment Division - UKM Music STMIK IKMI Cirebon (Mar 2021 – Mar 2023)">
+                Kepala Divisi Perlengkapan - UKM Musik STMIK IKMI Cirebon (Mar 2021 – Mar 2023)
+            </span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="panel">
+            <p data-en="The head of the equipment division is responsible for supervising and directing members to maintain the available musical instruments.">Kepala divisi perlengkapan bertanggung jawab untuk mengawasi dan mengarahkan anggota untuk merawat alat musik yang tersedia.</p>
+        </div>
+
+        <button class="accordion">
+            <span data-en="Participant Volunteer - KIP Kuliah 2022 (Jan 2022 – Sept 2022)">
+                Relawan Peserta - KIP Kuliah 2022 (Jan 2022 – Sept 2022)
+            </span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="panel">
+            <p data-en="KIP Kuliah volunteers are people who are committed and work voluntarily to make the KIP Kuliah program initiated by the government a success. The task of KIP Kuliah volunteers is to carry out outreach and assist high school students who have difficulty paying for college. The students targeted for socialization by the volunteers are high school students graduating in 2019, 2021, and 2022.">Relawan KIP Kuliah adalah orang-orang yang berkomitmen dan bekerja secara sukarela untuk menyukseskan program KIP Kuliah yang digagas oleh pemerintah. Tugas relawan KIP Kuliah adalah melakukan sosialisasi dan membantu siswa SMA yang kesulitan membayar biaya kuliah. Siswa yang menjadi sasaran sosialisasi oleh relawan adalah siswa SMA lulusan tahun 2019, 2021, dan 2022.</p>
+
+            <p data-en="Volunteers are tasked with providing comprehensive information about KIP Kuliah, starting from the meaning, requirements, and how to get it to the benefits of having KIP Kuliah. Not only that, volunteers are also required to provide motivation so that students want to continue studying.">Relawan ditugaskan untuk memberikan informasi yang komprehensif tentang KIP Kuliah, mulai dari pengertian, syarat, cara mendapatkan hingga manfaat memiliki KIP Kuliah. Tak hanya itu, relawan juga wajib memberikan motivasi agar siswa mau melanjutkan studi.</p>
+
+            <p data-en="Even though they work voluntarily, of course there are several benefits that KIP Kuliah volunteers can get. Volunteers can have a wider network of connections, especially with fellow volunteers who come from various regions of Indonesia. Apart from that, volunteers will also get an experience e-certificate.">Meskipun bekerja secara sukarela, tentu ada beberapa manfaat yang bisa didapatkan oleh relawan KIP Kuliah. Relawan bisa memiliki jaringan koneksi yang lebih luas, terutama dengan sesama relawan yang berasal dari berbagai daerah di Indonesia. Selain itu, relawan juga akan mendapatkan e-sertifikat pengalaman.</p>
+
+            <p data-en="However, the most important thing to understand is that KIP Kuliah volunteers have indirectly helped produce a competent young generation who can advance the nation. So, volunteers have a big role in the world of education and can be agents of change in society.">Namun, hal terpenting untuk dipahami adalah bahwa relawan KIP Kuliah secara tidak langsung telah membantu menghasilkan generasi muda yang kompeten yang dapat memajukan bangsa. Jadi, relawan memiliki peran besar dalam dunia pendidikan dan dapat menjadi agen perubahan di masyarakat.</p>
+
+            <button class="view-cert-btn" onclick="openModal(['cert-kip-1.jpg','cert-kip-2.jpg'])"><span data-en="View Certificate">Lihat Sertifikat</span></button>
+        </div>
+    </div>
+</div>
+
+<section id="contact" class="contact-section">
+    <h2 data-en="Interested in Collaborating?">Tertarik untuk Berkolaborasi?</h2>
+    <p data-en="Let's discuss your project! You can reach me via email.">Mari diskusikan proyek Anda! Anda dapat menghubungi saya melalui email.</p>
+    <form class="contact-form" action="#" method="post">
+        <div class="form-group">
+            <label for="name"><span data-en="Name*">Nama*</span></label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email"><span data-en="Email Address*">Alamat Email*</span></label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="message"><span data-en="Message*">Pesan*</span></label>
+            <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="form-submit-btn"><span data-en="Submit">Kirim</span></button>
+    </form>
+</section>
+
+<footer class="site-footer">
     <div class="social-icons">
         <a href="https://www.linkedin.com/in/hahahahan/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
         <a href="https://www.facebook.com/hahahahan101/" target="_blank"><i class="fab fa-facebook-f"></i></a>
         <a href="https://www.instagram.com/hahahahan_101/" target="_blank"><i class="fab fa-instagram"></i></a>
         <a href="https://www.youtube.com/@hahahahan_101" target="_blank"><i class="fab fa-youtube"></i></a>
     </div>
-    <p>© 2025 Nursehan Zaelani, All Rights Reserved</p>
+    <p><span data-en="© 2025 Nursehan Zaelani, All Rights Reserved">© 2025 Nursehan Zaelani, Hak Cipta Dilindungi</span></p>
 </footer>
 
 <div id="certModal" class="modal" onclick="if(event.target===this) closeModal()">
@@ -373,7 +846,7 @@
         <div class="carousel-container" id="carouselContainer"></div>
         <span class="prev" onclick="changeSlide(-1)">&#10094;</span>
         <span class="next" onclick="changeSlide(1)">&#10095;</span>
-        <button class="close-btn" onclick="closeModal()">Close</button>
+        <button class="close-btn" onclick="closeModal()"><span data-en="Close">Tutup</span></button>
     </div>
 </div>
 
@@ -383,9 +856,52 @@
         btn.addEventListener("click", function() {
             this.classList.toggle("active");
             const panel = this.nextElementSibling;
-            panel.style.display = panel.style.display === "block" ? "none" : "block";
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
         });
     });
+
+    // Mobile Navigation Toggle
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+        document.querySelector('.mobile-menu-overlay').classList.add('open');
+    });
+
+    document.querySelector('.mobile-menu-close-btn').addEventListener('click', () => {
+        document.querySelector('.mobile-menu-overlay').classList.remove('open');
+    });
+
+    // Language switcher functionality
+    function toggleLanguage() {
+        const langTextSpan = document.getElementById('lang-text');
+        const currentLang = document.documentElement.lang;
+        const newLang = currentLang === 'id' ? 'en' : 'id';
+        
+        document.documentElement.lang = newLang;
+        
+        // Update language switcher text
+        if (newLang === 'en') {
+            langTextSpan.textContent = 'English';
+            langTextSpan.dataset.en = 'English';
+            document.title = 'Nursehan Zaelani Profile';
+        } else {
+            langTextSpan.textContent = 'Bahasa Indonesia';
+            langTextSpan.dataset.en = 'English';
+            document.title = 'Profil Nursehan Zaelani';
+        }
+        
+        // Update all elements with data-en attribute
+        const translatableElements = document.querySelectorAll('[data-en]');
+        translatableElements.forEach(el => {
+            const currentText = el.textContent;
+            const enText = el.dataset.en;
+            
+            el.textContent = enText;
+            el.dataset.en = currentText;
+        });
+    }
 
     // Carousel
     let currentSlide = 0;
@@ -423,4 +939,3 @@
 
 </body>
 </html>
-
