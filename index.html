@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Nursehan Zaelani</title>
+
+    <!-- Google Fonts: Lexend -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            max-width: 800px;
+            margin: 40px auto 0 auto;
+        }
+        
+        .profile-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            flex-grow: 1;
+        }
+
+        .profile-info h1 {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 0;
+            color: #333;
+        }
+
+        .profile-info p {
+            font-size: 0.9em;
+            color: #555;
+            margin: 5px 0 15px 0;
+            line-height: 1.4;
+        }
+        
+        .contact-link {
+            display: inline-block;
+            color: #007bff;
+            text-decoration: none;
+            transition: text-decoration 0.3s ease;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Education Wrapper */
+        .edu-wrapper {
+            max-width: 1000px;
+            margin: 30px auto 0 auto;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .education-section {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .education-section h2 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .accordion {
+            background-color: #f7f7f7;
+            color: #333;
+            cursor: pointer;
+            padding: 10px 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion:hover {
+            background-color: #e9ecef;
+        }
+
+        .accordion i {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion.active i {
+            transform: rotate(90deg);
+        }
+
+        .panel {
+            padding: 0 15px;
+            display: none;
+            background-color: white;
+            overflow: hidden;
+            border-left: 3px solid #007bff;
+            margin-bottom: 10px;
+        }
+
+        .panel p {
+            margin: 8px 0;
+            color: #555;
+            font-size: 0.85em;
+        }
+
+        /* Button */
+        .view-cert-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .view-cert-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 80%;
+            max-height: 80%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+            z-index: 1001;
+        }
+
+        /* Carousel */
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            max-height: 65vh;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            padding: 6px 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        /* Close Button in Modal */
+        .close-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 6px 14px;
+            font-size: 0.85em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0 15px;
+        }
+
+        .close-btn:hover {
+            background-color: #b02a37;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            color: #6c757d;
+        }
+
+        .social-icons {
+            margin-bottom: 10px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            color: #6c757d;
+            font-size: 18px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="profile-container">
+    <img src="sehan.png" alt="Nursehan Zaelani" class="profile-picture">
+    <div class="profile-info">
+        <h1>Nursehan Zaelani</h1>
+        <p>I’m a graduate of Informatics Engineering from STMIK IKMI Cirebon. Currently, I work as a Graphic Designer at Showroom Setia Kawan Motor, a Remote Graphic & UI Designer at PT Tecnolica Malini Kayya, and a Private Graphic Design Tutor at Hitaclass (PT Hitamedia Inovasi Hutama). With a passion for visual storytelling and user-centered design, I help businesses and individuals create engaging and effective digital experiences.</p>
+        <a href="mailto:nursehanz101@gmail.com" class="contact-link">Interested in collaborating? Feel free to email me!</a>
+    </div>
+</div>
+
+<!-- Education Wrapper -->
+<div class="edu-wrapper">
+
+    <!-- Formal Education -->
+    <div class="education-section">
+        <h2>Formal Education</h2>
+
+        <button class="accordion">SMA Negeri 1 Palimanan (Dec 2017 – May 2020) <i class="fas fa-chevron-right"></i></button>
+        <div class="panel">
+            <p>I majored in Social Sciences (IPS) and actively participated in the PASS (School Arts Appreciation Program) organization, where I contributed to various creative and cultural school events that enhanced teamwork and leadership skills.</p>
+        </div>
+
+        <button class="accordion">STMIK IKMI Cirebon (Sep 2020 – Nov 2024) <i class="fas fa-chevron-right"></i></button>
+        <div class="panel">
+            <p>I have graduated with a Bachelor's degree (S1) in Informatics Engineering from STMIK IKMI Cirebon. I successfully completed my thesis and journal publication, which focused on researching the UI/UX design of online food product ordering websites.</p>
+        </div>
+
+        <button class="accordion">Universitas Negeri Padang (Aug 2022 – Dec 2022) <i class="fas fa-chevron-right"></i></button>
+        <div class="panel">
+            <p>In the fifth semester, I had the opportunity to take part in a program from Kampus Merdeka, namely Pertukaran Mahasiswa Merdeka, at Padang State University for one semester. I chose to take cross-majors, namely Indonesian Language and Literature Education and English Language Education. One of the most engaging activities in this program was the Nusantara Module Course, which explored Minangkabau culture and related aspects. Through this activity, students were encouraged to explore, discover, and implement the inspiration they gained, while making social contributions to the community in the West Sumatra region, particularly in Padang City.</p>
+        </div>
+    </div>
+
+    <!-- Informal Education -->
+    <div class="education-section">
+        <h2>Informal Education</h2>
+
+        <button class="accordion">Data Management Staff - Digitalent Kominfo (Jul 2022) <i class="fas fa-chevron-right"></i></button>
+        <div class="panel">
+            <p>Throughout this training, participants acquire advanced proficiency in office software operation and other skills required for the Data Management Staff occupation. The training's objective is to produce Data Management Staff capable of effectively resolving office-related issues or tasks.</p>
+            <button class="view-cert-btn" onclick="openModal(['cert-dms-1.jpg','cert-dms-2.jpg'])">View Certificate</button>
+        </div>
+
+        <button class="accordion">Junior Web Developer - Digitalent Kominfo (Jul 2023) <i class="fas fa-chevron-right"></i></button>
+        <div class="panel">
+            <p>I learned to implement user interfaces, execute programming commands in text-based, graphic, and multimedia formats, organize functions, files, or other programming resources neatly, write code following guidelines and best practices, apply structured programming, and utilize existing libraries or components.</p>
+            <button class="view-cert-btn" onclick="openModal(['cert-jwd-1.jpg','cert-jwd-2.jpg'])">View Certificate</button>
+        </div>
+
+        <button class="accordion">Junior Graphic Designer - Digitalent Kominfo (Aug 2023) <i class="fas fa-chevron-right"></i></button>
+        <div class="panel">
+            <p>Throughout this training, I developed the ability to identify necessary visual elements and design them using design software to solve visual communication issues faced by clients. The training's output aims to produce junior graphic designers capable of effectively providing solutions to visual communication challenges.</p>
+            <button class="view-cert-btn" onclick="openModal(['cert-gd-1.jpg','cert-gd-2.jpg'])">View Certificate</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- Organization Experience -->
+<div class="education-section" style="max-width: 1000px; margin: 30px auto;">
+    <h2>Organization Experience</h2>
+
+    <button class="accordion">
+        Band Coordinator - PASS, SMA Negeri 1 Palimanan (Dec 2018 – Dec 2019)
+        <i class="fas fa-chevron-right"></i>
+    </button>
+    <div class="panel">
+        <p>The band coordinator is responsible for planning the practice schedule, developing concepts for practice materials, innovating with new ideas, solving problems, and maintaining effective communication between band members.</p>
+    </div>
+
+    <button class="accordion">
+        Head of Equipment Division - UKM Music STMIK IKMI Cirebon (Mar 2021 – Mar 2023)
+        <i class="fas fa-chevron-right"></i>
+    </button>
+    <div class="panel">
+        <p>The head of the equipment division is responsible for supervising and directing members to maintain the available musical instruments.</p>
+    </div>
+
+    <button class="accordion">
+        Participant Volunteer - KIP Kuliah 2022 (Jan 2022 – Sept 2022)
+        <i class="fas fa-chevron-right"></i>
+    </button>
+    <div class="panel">
+        <p>KIP Kuliah volunteers are people who are committed and work voluntarily to make the KIP Kuliah program initiated by the government a success. 
+        The task of KIP Kuliah volunteers is to carry out outreach and assist high school students who have difficulty paying for college. 
+        The students targeted for socialization by the volunteers are high school students graduating in 2019, 2021, and 2022.</p>
+
+        <p>Volunteers are tasked with providing comprehensive information about KIP Kuliah, starting from the meaning, requirements, and how to get it 
+        to the benefits of having KIP Kuliah. Not only that, volunteers are also required to provide motivation so that students want to continue studying.</p>
+
+        <p>Even though they work voluntarily, of course there are several benefits that KIP Kuliah volunteers can get. Volunteers can have a wider network of connections, 
+        especially with fellow volunteers who come from various regions of Indonesia. Apart from that, volunteers will also get an experience e-certificate.</p>
+
+        <p>However, the most important thing to understand is that KIP Kuliah volunteers have indirectly helped produce a competent young generation who can advance the nation. 
+        So, volunteers have a big role in the world of education and can be agents of change in society.</p>
+
+        <button class="view-cert-btn" onclick="openModal(['cert-kip-1.jpg','cert-kip-2.jpg'])">View Certificate</button>
+    </div>
+</div>
+
+<footer>
+    <div class="social-icons">
+        <a href="https://www.linkedin.com/in/hahahahan/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.facebook.com/hahahahan101/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/hahahahan_101/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@hahahahan_101" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p>© 2025 Nursehan Zaelani, All Rights Reserved</p>
+</footer>
+
+<!-- Modal -->
+<div id="certModal" class="modal" onclick="if(event.target===this) closeModal()">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+        <div class="carousel-container" id="carouselContainer"></div>
+        <span class="prev" onclick="changeSlide(-1)">&#10094;</span>
+        <span class="next" onclick="changeSlide(1)">&#10095;</span>
+        <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+<script>
+    // Accordion
+    document.querySelectorAll(".accordion").forEach(btn => {
+        btn.addEventListener("click", function() {
+            this.classList.toggle("active");
+            const panel = this.nextElementSibling;
+            panel.style.display = panel.style.display === "block" ? "none" : "block";
+        });
+    });
+
+    // Carousel
+    let currentSlide = 0;
+    let images = [];
+
+    function openModal(imgArray) {
+        images = imgArray;
+        currentSlide = 0;
+        renderCarousel();
+        document.getElementById("certModal").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("certModal").style.display = "none";
+    }
+
+    function renderCarousel() {
+        const container = document.getElementById("carouselContainer");
+        container.innerHTML = images.map(src => `<div class="carousel-slide"><img src="${src}" alt="Certificate"></div>`).join('');
+        showSlide(currentSlide);
+    }
+
+    function changeSlide(n) {
+        currentSlide += n;
+        if (currentSlide < 0) currentSlide = images.length - 1;
+        if (currentSlide >= images.length) currentSlide = 0;
+        showSlide(currentSlide);
+    }
+
+    function showSlide(index) {
+        const container = document.getElementById("carouselContainer");
+        container.style.transform = `translateX(-${index * 100}%)`;
+    }
+</script>
+
+</body>
+</html>
