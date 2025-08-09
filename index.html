@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Nursehan Zaelani</title>
 
-    <!-- Google Fonts: Lexend -->
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
         body {
-            font-family: 'Lexend', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #ffffff;
             margin: 0;
             padding: 20px;
@@ -39,14 +37,14 @@
         }
 
         .profile-info h1 {
-            font-size: 1.8em;
+            font-size: 1.5em; /* Ukuran font diperkecil */
             font-weight: bold;
             margin: 0;
             color: #333;
         }
 
         .profile-info p {
-            font-size: 0.9em;
+            font-size: 0.8em; /* Ukuran font diperkecil */
             color: #555;
             margin: 5px 0 15px 0;
             line-height: 1.4;
@@ -57,6 +55,7 @@
             color: #007bff;
             text-decoration: none;
             transition: text-decoration 0.3s ease;
+            font-size: 0.8em;
         }
 
         .contact-link:hover {
@@ -78,7 +77,7 @@
         }
 
         .education-section h2 {
-            font-size: 1.2em;
+            font-size: 1.1em; /* Ukuran font diperkecil */
             margin-bottom: 15px;
             color: #333;
         }
@@ -92,13 +91,14 @@
             border: none;
             text-align: left;
             outline: none;
-            font-size: 0.9em;
+            font-size: 0.8em; /* Ukuran font diperkecil */
             transition: background-color 0.3s ease;
             border-radius: 5px;
             margin-bottom: 5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-family: 'Poppins', sans-serif; /* Ditambahkan agar font ini juga Poppins */
         }
 
         .accordion:hover {
@@ -125,7 +125,8 @@
         .panel p {
             margin: 8px 0;
             color: #555;
-            font-size: 0.85em;
+            font-size: 0.75em; /* Ukuran font diperkecil */
+            font-family: 'Poppins', sans-serif; /* Ditambahkan agar font ini juga Poppins */
         }
 
         /* Button */
@@ -133,11 +134,12 @@
             background-color: #007bff;
             color: white;
             padding: 5px 10px;
-            font-size: 0.8em;
+            font-size: 0.7em; /* Ukuran font diperkecil */
             border: none;
             border-radius: 4px;
             cursor: pointer;
             margin-top: 5px;
+            font-family: 'Poppins', sans-serif; /* Ditambahkan agar font ini juga Poppins */
         }
 
         .view-cert-btn:hover {
@@ -217,11 +219,12 @@
             background-color: #dc3545;
             color: white;
             padding: 6px 14px;
-            font-size: 0.85em;
+            font-size: 0.75em; /* Ukuran font diperkecil */
             border: none;
             border-radius: 4px;
             cursor: pointer;
             margin: 10px 0 15px;
+            font-family: 'Poppins', sans-serif; /* Ditambahkan agar font ini juga Poppins */
         }
 
         .close-btn:hover {
@@ -243,7 +246,7 @@
         .social-icons a {
             margin: 0 10px;
             color: #6c757d;
-            font-size: 18px;
+            font-size: 16px; /* Ukuran font diperkecil */
             text-decoration: none;
             transition: color 0.3s;
         }
@@ -251,12 +254,16 @@
         .social-icons a:hover {
             color: #007bff;
         }
+        
+        footer p {
+            font-size: 0.75em; /* Ukuran font diperkecil */
+        }
     </style>
 </head>
 <body>
 
 <div class="profile-container">
-    <img src="sehan.png" alt="Nursehan Zaelani" class="profile-picture">
+    <img src="img/sehan.png" alt="Nursehan Zaelani" class="profile-picture">
     <div class="profile-info">
         <h1>Nursehan Zaelani</h1>
         <p>I’m a graduate of Informatics Engineering from STMIK IKMI Cirebon. Currently, I work as a Graphic Designer at Showroom Setia Kawan Motor, a Remote Graphic & UI Designer at PT Tecnolica Malini Kayya, and a Private Graphic Design Tutor at Hitaclass (PT Hitamedia Inovasi Hutama). With a passion for visual storytelling and user-centered design, I help businesses and individuals create engaging and effective digital experiences.</p>
@@ -264,10 +271,8 @@
     </div>
 </div>
 
-<!-- Education Wrapper -->
 <div class="edu-wrapper">
 
-    <!-- Formal Education -->
     <div class="education-section">
         <h2>Formal Education</h2>
 
@@ -287,7 +292,6 @@
         </div>
     </div>
 
-    <!-- Informal Education -->
     <div class="education-section">
         <h2>Informal Education</h2>
 
@@ -312,7 +316,6 @@
 
 </div>
 
-<!-- Organization Experience -->
 <div class="education-section" style="max-width: 1000px; margin: 30px auto;">
     <h2>Organization Experience</h2>
 
@@ -364,7 +367,6 @@
     <p>© 2025 Nursehan Zaelani, All Rights Reserved</p>
 </footer>
 
-<!-- Modal -->
 <div id="certModal" class="modal" onclick="if(event.target===this) closeModal()">
     <span class="close-modal" onclick="closeModal()">&times;</span>
     <div class="modal-content">
