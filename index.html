@@ -619,6 +619,7 @@
             <li><a href="#portfolio"><span data-en="Portofolio">Portfolio</span></a></li>
             <li><a href="#education"><span data-en="Pendidikan">Education</span></a></li>
             <li><a href="#contact"><span data-en="Kontak">Contact</span></a></li>
+            <li><a href="#" onclick="toggleLanguage()"><span id="lang-text-desktop">Bahasa Indonesia</span></a></li>
             <li><a href="https://wa.me/6289602307535" class="cta-btn" target="_blank"><span data-en="Mari Berbincang">Let's Talk</span></a></li>
         </ul>
     </div>
@@ -813,7 +814,7 @@
 <section id="contact" class="contact-section">
     <h2 data-en="Tertarik untuk Berkolaborasi?">Interested in Collaborating?</h2>
     <p data-en="Mari diskusikan proyek Anda! Anda dapat menghubungi saya melalui email.">Let's discuss your project! You can reach me via email.</p>
-    <form class="contact-form" action="#" method="post">
+    <form class="contact-form" action="mailto:nursehanz101@gmail.com" method="post" enctype="text/plain">
         <div class="form-group">
             <label for="name"><span data-en="Nama*">Name*</span></label>
             <input type="text" id="name" name="name" required>
@@ -875,22 +876,12 @@
 
     // Language switcher functionality
     function toggleLanguage() {
-        const langTextSpan = document.getElementById('lang-text');
+        const langTextMobile = document.getElementById('lang-text');
+        const langTextDesktop = document.getElementById('lang-text-desktop');
         const currentLang = document.documentElement.lang;
         const newLang = currentLang === 'id' ? 'en' : 'id';
         
         document.documentElement.lang = newLang;
-        
-        // Update language switcher text
-        if (newLang === 'en') {
-            langTextSpan.textContent = 'Bahasa Indonesia';
-            langTextSpan.dataset.en = 'English';
-            document.title = 'Profil Nursehan Zaelani';
-        } else {
-            langTextSpan.textContent = 'English';
-            langTextSpan.dataset.en = 'Bahasa Indonesia';
-            document.title = 'Nursehan Zaelani Profile';
-        }
         
         // Update all elements with data-en attribute
         const translatableElements = document.querySelectorAll('[data-en]');
@@ -901,6 +892,15 @@
             el.textContent = enText;
             el.dataset.en = currentText;
         });
+
+        // Update language text on both desktop and mobile buttons
+        if (newLang === 'en') {
+            langTextMobile.textContent = 'Bahasa Indonesia';
+            langTextDesktop.textContent = 'Bahasa Indonesia';
+        } else {
+            langTextMobile.textContent = 'English';
+            langTextDesktop.textContent = 'English';
+        }
     }
 
     // Carousel
