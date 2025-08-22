@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nursehan Zaelani Profile</title>
+    <title>Sehan's Profile</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -14,15 +14,160 @@
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #ffffff;
+            color: #333;
             margin: 0;
             padding: 15px;
             font-size: 14px; /* Base font size */
             line-height: 1.5;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         h1, h2, h3, p {
             margin: 0;
             padding: 0;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .navbar {
+            background-color: #2b2b2b;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        body.dark-mode .nav-links a,
+        body.dark-mode .mobile-nav-links a {
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .nav-links a:hover {
+            color: #0099ff;
+        }
+
+        body.dark-mode .mobile-menu-overlay {
+            background-color: #1a1a1a;
+        }
+
+        body.dark-mode .mobile-menu-close-btn {
+            background: none;
+            border-color: #555;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .profile-info h1,
+        body.dark-mode .section-item h2,
+        body.dark-mode .portfolio-section h2,
+        body.dark-mode .contact-section h2 {
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .profile-info p {
+            color: #ccc;
+        }
+
+        body.dark-mode .accordion {
+            background-color: #2b2b2b;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .accordion:hover {
+            background-color: #3d3d3d;
+        }
+
+        body.dark-mode .panel {
+            background-color: #252525;
+            border-left-color: #0099ff;
+        }
+
+        body.dark-mode .panel p,
+        body.dark-mode .panel ul {
+            color: #ccc;
+        }
+
+        body.dark-mode .contact-section {
+            background-color: #2b2b2b;
+        }
+
+        body.dark-mode .form-group label {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea {
+            background-color: #3d3d3d;
+            border-color: #555;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .site-footer {
+            color: #999;
+        }
+
+        body.dark-mode .social-icons a {
+            color: #999;
+        }
+
+        body.dark-mode .social-icons a:hover {
+            color: #0099ff;
+        }
+
+        /* Switch styles */
+        .switch-container {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background-color: #e9e9e9;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .switch-container.dark-mode {
+            background-color: #444;
+        }
+
+        .switch-circle {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: #fff;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+
+        .switch-container.dark-mode .switch-circle {
+            transform: translateX(22px);
+            background-color: #3b82f6;
+        }
+
+        .switch-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .switch-icon.sun {
+            left: 5px;
+        }
+
+        .switch-icon.moon {
+            right: 5px;
+        }
+
+        .switch-container.dark-mode .switch-icon.sun {
+            color: #888;
+        }
+
+        .switch-container.dark-mode .switch-icon.moon {
+            color: #fff;
         }
 
         /* Style for Navigation */
@@ -35,6 +180,7 @@
             font-family: 'Poppins', sans-serif;
             padding: 8px 0;
             width: 100%;
+            transition: background-color 0.3s;
         }
         
         .navbar-container {
@@ -56,7 +202,8 @@
             margin: 0;
             padding: 0;
             display: flex;
-            gap: 15px;
+            align-items: center;
+            gap: 20px; /* Adjusting gap for better spacing */
         }
         
         .nav-links a {
@@ -68,6 +215,21 @@
         }
         
         .nav-links a:hover {
+            color: #007bff;
+        }
+
+        .lang-switcher-btn, .dark-mode-switcher-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #555;
+            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .dark-mode-switcher-btn:hover, .lang-switcher-btn:hover {
             color: #007bff;
         }
         
@@ -161,7 +323,7 @@
             transition: color 0.3s ease;
         }
 
-        .lang-switcher {
+        .lang-switcher, .dark-mode-switcher {
             display: flex;
             align-items: center;
             gap: 10px;
@@ -171,7 +333,7 @@
             align-self: flex-start;
         }
         
-        .lang-switcher i {
+        .lang-switcher i, .dark-mode-switcher i {
             color: #333;
         }
 
@@ -263,6 +425,18 @@
             flex: 1;
             padding: 30px;
             display: flex;
+            flex-direction: row; /* Align gif and text horizontally */
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Space between the gif and the text wrapper */
+        }
+        .portfolio-banner-gif {
+            width: 300px; /* PERUBAHAN: Ukuran gambar animasi diperbesar */
+            height: auto;
+            flex-shrink: 0;
+        }
+        .portfolio-text-wrapper {
+            display: flex;
             flex-direction: column;
             justify-content: center;
         }
@@ -283,6 +457,7 @@
             background-size: cover;
             background-position: center;
             min-height: 200px;
+            display: none; /* Menyembunyikan elemen banner-image agar GIF menempati ruang yang ada */
         }
         .portfolio-btn {
             display: inline-block;
@@ -294,6 +469,7 @@
             font-weight: 600;
             font-size: 0.85em;
             transition: background-color 0.3s ease;
+            align-self: flex-start; /* Tambahan kode untuk membuat lebar tombol pas dengan teks */
         }
         .portfolio-btn:hover {
             background-color: #e9e9e9;
@@ -305,11 +481,21 @@
                 flex-direction: column;
             }
             .portfolio-banner-content {
+                flex-direction: column; /* Stack elements vertically on mobile */
                 padding: 20px;
                 text-align: center;
+                align-items: center;
             }
             .portfolio-banner-image {
                 min-height: 180px;
+                display: none;
+            }
+            .portfolio-banner-gif {
+                width: 150px; /* PERUBAHAN: Ukuran gambar animasi yang lebih kecil untuk mobile */
+                margin-bottom: 15px; /* Add space below the gif */
+            }
+            .portfolio-text-wrapper {
+                align-items: center;
             }
         }
 
@@ -379,6 +565,20 @@
             cursor: pointer;
             margin-top: 8px;
             font-family: 'Poppins', sans-serif;
+        }
+        
+        .view-cert-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 6px 12px;
+            font-size: 0.8em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 8px;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none; /* Make it look like a button */
+            display: inline-block;
         }
 
         .view-cert-btn:hover {
@@ -599,9 +799,6 @@
             .section-item {
                 min-width: 100%;
             }
-            .portfolio-banner {
-                flex-direction: column;
-            }
         }
     </style>
 </head>
@@ -609,18 +806,27 @@
 
 <nav class="navbar">
     <div class="navbar-container">
-        <a href="#home" class="nav-brand"><img src="img/logo.jpg" alt="Logo"></a>
+        <a href="#home" class="nav-brand">
+            <img id="nav-logo" src="img/logo1.png" alt="Logo">
+        </a>
         <button class="menu-toggle" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
         </button>
         <ul class="nav-links">
             <li><a href="#home"><span data-en="Beranda">Home</span></a></li>
             <li><a href="#experience"><span data-en="Pengalaman">Experience</span></a></li>
-            <li><a href="#portfolio"><span data-en="Portofolio">Portfolio</span></a></li>
             <li><a href="#education"><span data-en="Pendidikan">Education</span></a></li>
+            <li><a href="#portfolio"><span data-en="Portofolio">Portfolio</span></a></li>
             <li><a href="#contact"><span data-en="Kontak">Contact</span></a></li>
-            <li><a href="#" onclick="toggleLanguage()"><span id="lang-text-desktop">Bahasa Indonesia</span></a></li>
             <li><a href="https://wa.me/6289602307535" class="cta-btn" target="_blank"><span data-en="Mari Berbincang">Let's Talk</span></a></li>
+            <li><a href="#" onclick="toggleLanguage()" class="lang-switcher-btn"><i class="fas fa-globe"></i><span id="lang-text-desktop">IDN</span></a></li>
+            <li>
+                <div class="switch-container" id="darkModeSwitch">
+                    <i class="fas fa-sun switch-icon sun"></i>
+                    <i class="fas fa-moon switch-icon moon"></i>
+                    <div class="switch-circle"></div>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>
@@ -633,13 +839,17 @@
     <ul class="mobile-nav-links">
         <li><a href="#home"><span data-en="Beranda">Home</span></a></li>
         <li><a href="#experience"><span data-en="Pengalaman">Experience</span></a></li>
-        <li><a href="#portfolio"><span data-en="Portofolio">Portfolio</span></a></li>
         <li><a href="#education"><span data-en="Pendidikan">Education</span></a></li>
+        <li><a href="#portfolio"><span data-en="Portofolio">Portfolio</span></a></li>
         <li><a href="#contact"><span data-en="Kontak">Contact</span></a></li>
     </ul>
     <div class="lang-switcher" onclick="toggleLanguage()">
-        <i class="fas fa-comment"></i>
-        <span id="lang-text" data-en="English">Bahasa Indonesia</span>
+        <i class="fas fa-globe"></i>
+        <span id="lang-text">IDN</span>
+    </div>
+    <div class="dark-mode-switcher" onclick="toggleDarkMode()">
+        <i id="dark-mode-icon-mobile" class="fas fa-moon"></i>
+        <span data-en="Mode Gelap">Dark Mode</span>
     </div>
 </div>
 
@@ -681,6 +891,7 @@
                     <li data-en="Menerapkan prinsip UI/UX untuk meningkatkan keterlibatan pelanggan melalui desain yang efektif dan ramah pengguna">Applying UI/UX principles to improve customer engagement through effective, user-friendly design</li>
                     <li data-en="Menerjemahkan tujuan pemasaran ke dalam visual berkualitas tinggi dan desain antarmuka">Translating marketing objectives into high-quality visuals and interface designs</li>
                     <li data-en="Membuat komponen UI yang bersih, konsisten, dan responsif yang selaras dengan branding dan tujuan klien">Crafting clean, consistent, and responsive UI components that align with client branding and goals</li>
+                    <li data-en="Memastikan desain responsif dan ramah pengguna di berbagai perangkat">Ensuring responsive and user-friendly designs across various devices</li>
                 </ul>
                 <p data-en="Dengan portofolio yang kuat dalam desain UI situs web dan landing page, saya memanfaatkan keterampilan saya untuk memberikan solusi digital yang berdampak yang memenuhi kebutuhan pengguna dan tujuan bisnis.">With a strong portfolio in website and landing page UI design, I leverage my skills to deliver impactful digital solutions that meet both user needs and business objectives.</p>
             </div>
@@ -692,18 +903,6 @@
                 <p data-en="Di Hitaclass, saya bekerja sebagai tutor desain grafis privat, membantu individu membangun fondasi yang kuat dalam desain melalui pembelajaran satu-satu yang praktis. Kursus ini disesuaikan untuk mereka yang ingin mengembangkan keterampilan kreatif tanpa memerlukan latar belakang pendidikan formal.">At Hitaclass, I work as a private graphic design tutor, helping individuals build a strong foundation in design through one-on-one, hands-on learning. The course is tailored for those who want to develop their creative skills without needing a formal education background.</p>
                 <p data-en="Saya membuat dan memberikan pelajaran yang dipersonalisasi berdasarkan tujuan setiap siswa—meliputi prinsip-prinsip desain inti dan sesi praktik terpandu. Fokus saya adalah membantu siswa mengembangkan portofolio yang solid dan mendapatkan kepercayaan diri untuk mengejar peluang di industri kreatif.">I create and deliver personalized lessons based on each student’s goals—covering core design principles and guided practice sessions. My focus is on helping students develop a solid portfolio and gain the confidence to pursue opportunities in the creative industry.</p>
             </div>
-        </div>
-    </div>
-    
-    <div id="portfolio" class="portfolio-section">
-        <h2 data-en="Portofolio">Portfolio</h2>
-        <div class="portfolio-banner">
-            <div class="portfolio-banner-content">
-                <h3 data-en="Tertarik dengan Proyek Saya?">Interested in My Projects?</h3>
-                <p data-en="Jelajahi berbagai karya desain grafis dan UI/UX saya untuk melihat bagaimana saya dapat membantu Anda mencapai tujuan bisnis Anda.">Explore my various graphic and UI/UX design works to see how I can help you achieve your business goals.</p>
-                <a href="#" class="portfolio-btn"><span data-en="Lihat Lebih Banyak Proyek">View More Projects</span></a>
-            </div>
-            <div class="portfolio-banner-image"></div>
         </div>
     </div>
 </div>
@@ -734,6 +933,14 @@
         </button>
         <div class="panel">
             <p data-en="Pada semester lima, saya berkesempatan mengikuti program dari Kampus Merdeka, yaitu Pertukaran Mahasiswa Merdeka, di Universitas Negeri Padang selama satu semester. Saya memilih untuk mengambil lintas jurusan, yaitu Pendidikan Bahasa dan Sastra Indonesia serta Pendidikan Bahasa Inggris. Salah satu kegiatan paling menarik dalam program ini adalah Mata Kuliah Modul Nusantara, yang mendalami budaya Minangkabau dan aspek-aspek terkait. Melalui kegiatan ini, mahasiswa didorong untuk menjelajahi, menemukan, dan mengimplementasikan inspirasi yang mereka dapatkan, sambil memberikan kontribusi sosial kepada masyarakat di wilayah Sumatera Barat, khususnya di Kota Padang.">In the fifth semester, I had the opportunity to take part in a program from Kampus Merdeka, namely Pertukaran Mahasiswa Merdeka, at Padang State University for one semester. I chose to take cross-majors, namely Indonesian Language and Literature Education and English Language Education. One of the most engaging activities in this program was the Nusantara Module Course, which explored Minangkabau culture and related aspects. Through this activity, students were encouraged to explore, discover, and implement the inspiration they gained, while making social contributions to the community in the West Sumatra region, particularly in Padang City.</p>
+
+            <p data-en="Relawan ditugaskan untuk memberikan informasi yang komprehensif tentang KIP Kuliah, mulai dari pengertian, syarat, cara mendapatkan hingga manfaat memiliki KIP Kuliah. Tak hanya itu, relawan juga wajib memberikan motivasi agar siswa mau melanjutkan studi.">Volunteers are tasked with providing comprehensive information about KIP Kuliah, starting from the meaning, requirements, and how to get it to the benefits of having KIP Kuliah. Not only that, volunteers are also required to provide motivation so that students want to continue studying.</p>
+
+            <p data-en="Meskipun bekerja secara sukarela, tentu ada beberapa manfaat yang bisa didapatkan oleh relawan KIP Kuliah. Relawan bisa memiliki jaringan koneksi yang lebih luas, terutama dengan sesama relawan yang berasal dari berbagai daerah di Indonesia. Selain itu, relawan juga akan mendapatkan e-sertifikat pengalaman.">Even though they work voluntarily, of course there are several benefits that KIP Kuliah volunteers can get. Volunteers can have a wider network of connections, especially with fellow volunteers who come from various regions of Indonesia. Apart from that, volunteers will also get an experience e-certificate.</p>
+
+            <p data-en="Namun, hal terpenting untuk dipahami adalah bahwa relawan KIP Kuliah secara tidak langsung telah membantu menghasilkan generasi muda yang kompeten yang dapat memajukan bangsa. Jadi, relawan memiliki peran besar dalam dunia pendidikan dan dapat menjadi agen perubahan di masyarakat.">However, the most important thing to understand is that KIP Kuliah volunteers have indirectly helped produce a competent young generation who can advance the nation. So, volunteers have a big role in the world of education and can be agents of change in the community.</p>
+
+            <a href="https://drive.google.com/file/d/19gIMMRdll6EliSl7GrJmzx-1GYcQwYiX/view?usp=drive_link" class="view-cert-btn" target="_blank"><span data-en="Lihat Sertifikat">View Certificate</span></a>
         </div>
     </div>
 
@@ -746,7 +953,7 @@
         </button>
         <div class="panel">
             <p data-en="Selama pelatihan ini, peserta memperoleh kemahiran lanjutan dalam pengoperasian perangkat lunak kantor dan keterampilan lain yang diperlukan untuk pekerjaan Staf Manajemen Data. Tujuan pelatihan ini adalah menghasilkan Staf Manajemen Data yang mampu secara efektif menyelesaikan masalah atau tugas terkait kantor.">Throughout this training, participants acquire advanced proficiency in office software operation and other skills required for the Data Management Staff occupation. The training's objective is to produce Data Management Staff capable of effectively resolving office-related issues or tasks.</p>
-            <button class="view-cert-btn" onclick="openModal(['cert-dms-1.jpg','cert-dms-2.jpg'])"><span data-en="Lihat Sertifikat">View Certificate</span></button>
+            <a href="https://drive.google.com/file/d/19gIMMRdll6EliSl7GrJmzx-1GYcQwYiX/view?usp=drive_link" class="view-cert-btn" target="_blank"><span data-en="Lihat Sertifikat">View Certificate</span></a>
         </div>
 
         <button class="accordion">
@@ -755,7 +962,7 @@
         </button>
         <div class="panel">
             <p data-en="Saya belajar menerapkan antarmuka pengguna, menjalankan perintah pemrograman dalam format berbasis teks, grafis, dan multimedia, mengorganisasi fungsi, file, atau sumber daya pemrograman lain dengan rapi, menulis kode mengikuti pedoman dan praktik terbaik, menerapkan pemrograman terstruktur, dan memanfaatkan pustaka atau komponen yang ada.">I learned to implement user interfaces, execute programming commands in text-based, graphic, and multimedia formats, organize functions, files, or other programming resources neatly, write code following guidelines and best practices, apply structured programming, and utilize existing libraries or components.</p>
-            <button class="view-cert-btn" onclick="openModal(['cert-jwd-1.jpg','cert-jwd-2.jpg'])"><span data-en="Lihat Sertifikat">View Certificate</span></button>
+            <a href="https://drive.google.com/file/d/19gIMMRdll6EliSl7GrJmzx-1GYcQwYiX/view?usp=drive_link" class="view-cert-btn" target="_blank"><span data-en="Lihat Sertifikat">View Certificate</span></a>
         </div>
 
         <button class="accordion">
@@ -764,7 +971,7 @@
         </button>
         <div class="panel">
             <p data-en="Sepanjang pelatihan ini, saya mengembangkan kemampuan untuk mengidentifikasi elemen visual yang diperlukan dan mendesainnya menggunakan perangkat lunak desain untuk memecahkan masalah komunikasi visual yang dihadapi klien. Keluaran pelatihan ini bertujuan untuk menghasilkan desainer grafis junior yang mampu secara efektif memberikan solusi untuk tantangan komunikasi visual.">Throughout this training, I developed the ability to identify necessary visual elements and design them using design software to solve visual communication issues faced by clients. The training's output aims to produce junior graphic designers capable of effectively providing solutions to visual communication challenges.</p>
-            <button class="view-cert-btn" onclick="openModal(['cert-gd-1.jpg','cert-gd-2.jpg'])"><span data-en="Lihat Sertifikat">View Certificate</span></button>
+            <a href="https://drive.google.com/file/d/19gIMMRdll6EliSl7GrJmzx-1GYcQwYiX/view?usp=drive_link" class="view-cert-btn" target="_blank"><span data-en="Lihat Sertifikat">View Certificate</span></a>
         </div>
     </div>
     
@@ -804,10 +1011,27 @@
 
             <p data-en="Meskipun bekerja secara sukarela, tentu ada beberapa manfaat yang bisa didapatkan oleh relawan KIP Kuliah. Relawan bisa memiliki jaringan koneksi yang lebih luas, terutama dengan sesama relawan yang berasal dari berbagai daerah di Indonesia. Selain itu, relawan juga akan mendapatkan e-sertifikat pengalaman.">Even though they work voluntarily, of course there are several benefits that KIP Kuliah volunteers can get. Volunteers can have a wider network of connections, especially with fellow volunteers who come from various regions of Indonesia. Apart from that, volunteers will also get an experience e-certificate.</p>
 
-            <p data-en="Namun, hal terpenting untuk dipahami adalah bahwa relawan KIP Kuliah secara tidak langsung telah membantu menghasilkan generasi muda yang kompeten yang dapat memajukan bangsa. Jadi, relawan memiliki peran besar dalam dunia pendidikan dan dapat menjadi agen perubahan di masyarakat.">However, the most important thing to understand is that KIP Kuliah volunteers have indirectly helped produce a competent young generation who can advance the nation. So, volunteers have a big role in the world of education and can be agents of change in society.</p>
+            <p data-en="Namun, hal terpenting untuk dipahami adalah bahwa relawan KIP Kuliah secara tidak langsung telah membantu menghasilkan generasi muda yang kompeten yang dapat memajukan bangsa. Jadi, relawan memiliki peran besar dalam dunia pendidikan dan dapat menjadi agen perubahan di masyarakat.">However, the most important thing to understand is that KIP Kuliah volunteers have indirectly helped produce a competent young generation who can advance the nation. So, volunteers have a big role in the education world and can be agents of change in the community.</p>
 
-            <button class="view-cert-btn" onclick="openModal(['cert-kip-1.jpg','cert-kip-2.jpg'])"><span data-en="Lihat Sertifikat">View Certificate</span></button>
+            <a href="https://drive.google.com/file/d/19gIMMRdll6EliSl7GrJmzx-1GYcQwYiX/view?usp=drive_link" class="view-cert-btn" target="_blank"><span data-en="Lihat Sertifikat">View Certificate</span></a>
         </div>
+    </div>
+</div>
+
+<div id="portfolio" class="portfolio-section">
+    <h2 data-en="Portofolio">Portfolio</h2>
+    <div class="portfolio-banner">
+        
+        <div class="portfolio-banner-content">
+            <img src="img/steps-21930_512.gif" alt="Animated character" class="portfolio-banner-gif">
+            <div class="portfolio-text-wrapper">
+                <h3 data-en="Tertarik dengan Proyek Saya?">Interested in My Projects?</h3>
+                <p data-en="Jelajahi berbagai karya desain grafis dan UI/UX saya untuk melihat bagaimana saya dapat membantu Anda mencapai tujuan bisnis Anda.">Explore my various graphic and UI/UX design works to see how I can help you achieve your business goals.</p>
+                <a href="https://www.canva.com/design/DAGM856IkFg/e13DLDQnEctiQImipAxb7g/edit?utm_content=DAGM856IkFg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="portfolio-btn"><span data-en="Lihat Lebih Banyak Proyek">View More Projects</span></a>
+            </div>
+        </div>
+        
+        <div class="portfolio-banner-image"></div>
     </div>
 </div>
 
@@ -895,12 +1119,49 @@
 
         // Update language text on both desktop and mobile buttons
         if (newLang === 'en') {
-            langTextMobile.textContent = 'Bahasa Indonesia';
-            langTextDesktop.textContent = 'Bahasa Indonesia';
+            langTextMobile.textContent = 'ENG';
+            langTextDesktop.textContent = 'ENG';
         } else {
-            langTextMobile.textContent = 'English';
-            langTextDesktop.textContent = 'English';
+            langTextMobile.textContent = 'IDN';
+            langTextDesktop.textContent = 'IDN';
         }
+    }
+
+    // Dark Mode functionality
+    const darkModeSwitch = document.getElementById('darkModeSwitch');
+    const navLogo = document.getElementById('nav-logo'); // Added this line
+
+    // Check for saved user preference
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedDarkMode === 'enabled') {
+        enableDarkMode();
+    } else {
+        // Ensure the logo is correct on page load for light mode
+        disableDarkMode();
+    }
+
+    darkModeSwitch.addEventListener('click', toggleDarkMode);
+
+    function toggleDarkMode() {
+        if (document.body.classList.contains('dark-mode')) {
+            disableDarkMode();
+        } else {
+            enableDarkMode();
+        }
+    }
+
+    function enableDarkMode() {
+        document.body.classList.add('dark-mode');
+        darkModeSwitch.classList.add('dark-mode');
+        navLogo.src = 'img/logo2.png'; // Updated this line
+        localStorage.setItem('darkMode', 'enabled');
+    }
+
+    function disableDarkMode() {
+        document.body.classList.remove('dark-mode');
+        darkModeSwitch.classList.remove('dark-mode');
+        navLogo.src = 'img/logo1.png'; // Updated this line
+        localStorage.setItem('darkMode', 'disabled');
     }
 
     // Carousel
