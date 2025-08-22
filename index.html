@@ -269,7 +269,7 @@
             z-index: 1000;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start; /* Changed from space-between */
             padding: 20px 30px;
             box-sizing: border-box;
             transform: translateX(-100%);
@@ -313,6 +313,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            margin-bottom: 40px; /* Added spacing below the links */
         }
         
         .mobile-nav-links a {
@@ -321,6 +322,13 @@
             font-size: 2em;
             font-weight: 600;
             transition: color 0.3s ease;
+        }
+
+        /* New container for language and dark mode switchers */
+        .mobile-menu-bottom-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Adjust the spacing between the two elements */
         }
 
         .lang-switcher, .dark-mode-switcher {
@@ -843,13 +851,15 @@
         <li><a href="#portfolio"><span data-en="Portofolio">Portfolio</span></a></li>
         <li><a href="#contact"><span data-en="Kontak">Contact</span></a></li>
     </ul>
-    <div class="lang-switcher" onclick="toggleLanguage()">
-        <i class="fas fa-globe"></i>
-        <span id="lang-text">IDN</span>
-    </div>
-    <div class="dark-mode-switcher" onclick="toggleDarkMode()">
-        <i id="dark-mode-icon-mobile" class="fas fa-moon"></i>
-        <span data-en="Mode Gelap">Dark Mode</span>
+    <div class="mobile-menu-bottom-controls">
+        <div class="lang-switcher" onclick="toggleLanguage()">
+            <i class="fas fa-globe"></i>
+            <span id="lang-text">IDN</span>
+        </div>
+        <div class="dark-mode-switcher" onclick="toggleDarkMode()">
+            <i id="dark-mode-icon-mobile" class="fas fa-moon"></i>
+            <span data-en="Mode Gelap">Dark Mode</span>
+        </div>
     </div>
 </div>
 
